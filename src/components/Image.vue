@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <template>
-  <div>
+  <div v-if="imageSrc">
     <img :src="`../../src/assets/weapons/${imageSrc}.png`">
   </div>
 </template>

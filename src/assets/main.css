@@ -10,4 +10,11 @@
 
 body {
   font-family: 'optimus-princeps', sans-serif;
+  background-image: url("https://images4.alphacoders.com/600/600921.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  
+  height: 100vh;
 }

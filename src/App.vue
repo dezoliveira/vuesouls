@@ -3,9 +3,13 @@
 </script>
 
 <template>
-  <HelloWorld />
+  <div class="background">
+    <HelloWorld />
+  </div>
 </template>
 
 <style scoped>
-
+  .background {
+    background-image: url("");
+  }
 </style>
