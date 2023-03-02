@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'optimus-princeps';
+  src: url('/assets/fonts/OptimusPrinceps.ttf');
+}
+
+* {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+body {
+  font-family: 'optimus-princeps', sans-serif;
+}
