@@ -1,14 +1,15 @@
 <script>
   import Image from '../components/Image.vue'
+  import ComboBox from '../components/ComboBox.vue'
   
   export default {
     components: {
-      Image
+      Image,
+      ComboBox
     },
     
     data() {
       return {
-        count: 0,
         weapons: null
       }
     },
@@ -29,6 +30,7 @@
 </script>
 
 <template>
+  <ComboBox :options="weapons"/>
   <div class="container">
     <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
       <div class="weapon-image">
