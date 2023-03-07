@@ -1,11 +1,11 @@
 <script>
   import Image from '../components/Image.vue'
-  import ComboBox from '../components/ComboBox.vue'
+  import SelectBox from '../components/SelectBox.vue'
   
   export default {
     components: {
       Image,
-      ComboBox
+      SelectBox
     },
     
     data() {
@@ -30,7 +30,7 @@
 </script>
 
 <template>
-  <ComboBox :options="weapons"/>
+  <SelectBox :options="weapons"/>
   <div class="container">
     <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
       <div class="weapon-image">

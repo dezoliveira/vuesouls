@@ -20,12 +20,13 @@ export default {
 }
 </script>
 <template>
-  <div class="comboBox">
+  <div class="selectBox">
     <label>Filter by:</label>
     <select>
       <option 
         v-for="option in options" 
         :key="option.name"
+        :value="option.weapon_type"
       >
         {{this.textFormat(option.weapon_type)}}
       </option>
@@ -33,18 +34,18 @@ export default {
   </div>
 </template>
 <style>
-  .comboBox {
+  .selectBox {
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
 
-  .comboBox label {
+  .selectBox label {
     font-size: 20px;
     color: #FFFFF0;
   }
 
-  .comboBox select {
+  .selectBox select {
     background: #72070F;
     color: #FFFFF0;
     border-radius: 16px;
@@ -53,7 +54,7 @@ export default {
     font-size: 22px;
   }
 
-  .comboBox select option {
+  .selectBox select option {
     background: rgba(29, 27, 27, 0.15);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
