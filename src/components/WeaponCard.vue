@@ -1,11 +1,13 @@
 <script>
   import Image from '../components/Image.vue'
   import SelectBox from '../components/SelectBox.vue'
-  
+  import Button from '../components/Button.vue'
+
   export default {
     components: {
       Image,
-      SelectBox
+      SelectBox,
+      Button
     },
     
     data() {
@@ -30,7 +32,11 @@
 </script>
 
 <template>
-  <SelectBox :options="weapons"/>
+  <div class="btnGroup">
+    <Button value="Normal View"/>
+    <Button value="Graphic View"/>
+    <SelectBox :options="weapons"/>
+  </div>
   <div class="container">
     <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
       <div class="weapon-image">
@@ -44,6 +50,11 @@
 </template>
 
 <style scoped>
+  .btnGroup {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
   .container {
     display: grid;
     grid-auto-rows: auto;

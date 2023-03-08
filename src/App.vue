@@ -1,10 +1,10 @@
 <script setup>
-  import HelloWorld from './components/WeaponCard.vue';
+  import WeaponCard from './components/WeaponCard.vue';
 </script>
 
 <template>
   <div class="background">
-    <HelloWorld />
+    <WeaponCard />
   </div>
 </template>
 
