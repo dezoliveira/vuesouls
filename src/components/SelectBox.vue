@@ -49,9 +49,9 @@ export default {
     background: #72070F;
     color: #FFFFF0;
     border-radius: 16px;
-    border: 1px solid rgba(29, 27, 27, 0.19);
+    border: 2px solid rgba(15, 14, 14, 0.585);
     padding: 10px 10px;
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .selectBox select option {
@@ -60,5 +60,19 @@ export default {
     -webkit-backdrop-filter: blur(5px);
     color: #FFFFF0;
     padding: 10px 10px;
+  }
+
+  .selectBox select::-webkit-scrollbar {
+    width: 18px;               /* width of the entire scrollbar */
+  }
+  
+  .selectBox select::-webkit-scrollbar-track {
+    background: rgba(15, 14, 14, 0.585);      /* color of the tracking area */
+  }
+  
+  .selectBox select::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 14, 14, 0.585);   /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid rgba(15, 14, 14, 0.585); /* creates padding around scroll thumb */
   }
 </style>
