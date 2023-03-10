@@ -2,12 +2,14 @@
   import Image from '../components/Image.vue'
   import SelectBox from '../components/SelectBox.vue'
   import Button from '../components/Button.vue'
+  import Input from '../components/Input.vue'
 
   export default {
     components: {
       Image,
       SelectBox,
-      Button
+      Button,
+      Input
     },
     
     data() {
@@ -32,10 +34,15 @@
 </script>
 
 <template>
-  <div class="btnGroup">
-    <Button value="Normal View"/>
-    <Button value="Graphic View"/>
-    <SelectBox :options="weapons"/>
+  <div class="choosenMenu">
+    <div>
+      <Input />
+    </div>
+    <div class="btnGroup">
+      <Button value="Normal View"/>
+      <Button value="Graphic View"/>
+      <SelectBox :options="weapons"/>
+    </div>
   </div>
   <div class="container">
     <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
@@ -54,6 +61,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+  .choosenMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .container {
     display: grid;
