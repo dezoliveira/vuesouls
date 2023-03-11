@@ -14,21 +14,34 @@
     
     data() {
       return {
-        weapons: null
+        weapons: null,
+        category: null
       }
     },
 
     methods: {
-      async loadWeapons() {
-        const req = await fetch('https://jgalat.github.io/ds-weapons-api/')
+      async loadWeapons(params) {
+        const req = await fetch('https://jgalat.github.io/ds-weapons-api/' + params)
         const data = await req.json()
         this.weapons = data
         console.log(data)
-      }
+      },
+
+      changeWeaponType(event) {
+        let weaponType = ''
+        if(event.target.value != '') {
+          console.log(event.target.value)
+          weaponType = 'weapon_type/' + event.target.value
+          this.category = event.target.value
+        }else {
+          this.category = null
+        }
+        this.loadWeapons(weaponType)
+      },
     },
 
     mounted() {
-      this.loadWeapons()
+      this.loadWeapons('')
     }
   }
 </script>
@@ -41,8 +54,11 @@
     <div class="btnGroup">
       <Button value="Normal View"/>
       <Button value="Graphic View"/>
-      <SelectBox :options="weapons"/>
+      <SelectBox @change="this.changeWeaponType($event)"/>
     </div>
+  </div>
+  <div v-if="category" class="category">
+    <h2>Category: {{category}}</h2>
   </div>
   <div class="container">
     <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
@@ -62,6 +78,14 @@
     align-items: center;
     justify-content: flex-end;
   }
+
+  .category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFF0;
+  }
+
   .choosenMenu {
     display: flex;
     align-items: center;

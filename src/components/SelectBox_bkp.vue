@@ -1,19 +1,13 @@
 <script>
 export default {
+  props: {
+    options: [],
+  },
   data() {
-    return {
-      options: [],
-    }
+    
   },
 
   methods: {
-    async loadWeapons() {
-      const req = await fetch('https://jgalat.github.io/ds-weapons-api/')
-      const data = await req.json()
-      this.options = data
-      console.log(data)
-    },
-
     textFormat(text){
       return text
                 .replace('-', ' ')
@@ -23,17 +17,12 @@ export default {
                         .join(' ')
     }
   },
-
-  mounted() {
-    this.loadWeapons()
-  }
 }
 </script>
 <template>
   <div class="selectBox">
     <label>Filter by:</label>
     <select>
-      <option :value="''">None</option>
       <option 
         v-for="option in options" 
         :key="option.name"
