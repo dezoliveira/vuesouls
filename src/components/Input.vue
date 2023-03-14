@@ -2,6 +2,12 @@
 export default {
   props: {
 
+  },
+
+  data() {
+    return {
+      
+    }
   }
 }
 </script>

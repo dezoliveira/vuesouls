@@ -14,8 +14,10 @@
     
     data() {
       return {
-        weapons: null,
-        category: null
+        weapons: [],
+        filteredWeapons: [],
+        category: null,
+        toggleButton: false
       }
     },
 
@@ -24,49 +26,92 @@
         const req = await fetch('https://jgalat.github.io/ds-weapons-api/' + params)
         const data = await req.json()
         this.weapons = data
-        console.log(data)
+        this.filteredWeapons = [...this.weapons]
       },
 
       changeWeaponType(event) {
-        let weaponType = ''
-        if(event.target.value != '') {
-          console.log(event.target.value)
-          weaponType = 'weapon_type/' + event.target.value
-          this.category = event.target.value
-        }else {
-          this.category = null
+        let input = event.target.value
+
+        let newWeapons = 
+          this.weapons.filter(x =>
+            x.weapon_type === input
+          )
+
+        this.filteredWeapons = newWeapons
+      },
+
+      searchWeapon(event) {
+        let input = event.target.value
+        let newSearch = ''
+
+        if(input != '' && input.length > 3) {
+            console.log('> 3')
+            newSearch =
+              this.weapons.filter(y =>
+                y.name.toLowerCase().includes(input.toLowerCase())
+              )
+            this.filteredWeapons = newSearch
+        } else {
+          this.filteredWeapons = this.weapons
         }
-        this.loadWeapons(weaponType)
+
+        console.log(newSearch)
+      },
+
+      textFormat(text){
+      return text
+                .replace(/[. ]/g, '-')
+                  .toLowerCase()
+      },
+
+      toggleButtons(e){
+        e.preventDefault()
+        let button = e.target.value
+        if(button == 'Normal View'){
+          this.toggleButton = false
+        } else {
+          this.toggleButton = true
+        }
       },
     },
 
     mounted() {
       this.loadWeapons('')
-    }
+    },
   }
 </script>
 
 <template>
   <div class="choosenMenu">
     <div>
-      <Input />
+      <Input @input="this.searchWeapon($event)"/>
     </div>
     <div class="btnGroup">
-      <Button value="Normal View"/>
-      <Button value="Graphic View"/>
+      <Button value="Normal View" @click="this.toggleButtons($event)"/>
+      <Button value="Graphic View" @click="this.toggleButtons($event)"/>
       <SelectBox @change="this.changeWeaponType($event)"/>
     </div>
   </div>
   <div v-if="category" class="category">
     <h2>Category: {{category}}</h2>
   </div>
-  <div class="container">
-    <div class="weapon-card" v-for="weapon in weapons" :key="weapon.name">
+  <div v-if="filteredWeapons.length" class="container">
+    <div class="weapon-card" v-for="weapon in filteredWeapons" :key="weapon.name">
       <div class="weapon-image">
         <Image :imageSrc="weapon.name"/>
       </div>
       <div class="weapon-title">
         <h1>{{weapon.name}}</h1>
+      </div>
+    </div>
+  </div>
+  <div v-else class="container" style="algin-items: center">
+    <div class="weapon-card">
+      <div class="weapon-image">
+        <Image :imageSrc="filteredWeapons.name"/>
+      </div>
+      <div class="weapon-title">
+        <h1>{{filteredWeapons.name}}</h1>
       </div>
     </div>
   </div>
