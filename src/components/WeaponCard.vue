@@ -3,13 +3,15 @@
   import SelectBox from '../components/SelectBox.vue'
   import Button from '../components/Button.vue'
   import Input from '../components/Input.vue'
+  import BarChart from '../components/BarChart.vue'
 
   export default {
     components: {
       Image,
       SelectBox,
       Button,
-      Input
+      Input,
+      BarChart
     },
     
     data() {
@@ -17,7 +19,7 @@
         weapons: [],
         filteredWeapons: [],
         category: null,
-        toggleButton: false
+        toggleButton: false,
       }
     },
 
@@ -25,6 +27,7 @@
       async loadWeapons(params) {
         const req = await fetch('https://jgalat.github.io/ds-weapons-api/' + params)
         const data = await req.json()
+        console.log(data)
         this.weapons = data
         this.filteredWeapons = [...this.weapons]
       },
@@ -45,7 +48,6 @@
         let newSearch = ''
 
         if(input != '' && input.length > 3) {
-            console.log('> 3')
             newSearch =
               this.weapons.filter(y =>
                 y.name.toLowerCase().includes(input.toLowerCase())
@@ -54,8 +56,6 @@
         } else {
           this.filteredWeapons = this.weapons
         }
-
-        console.log(newSearch)
       },
 
       textFormat(text){
@@ -97,12 +97,13 @@
   </div>
   <div v-if="filteredWeapons.length" class="container">
     <div class="weapon-card" v-for="weapon in filteredWeapons" :key="weapon.name">
-      <div class="weapon-image">
+      <!-- <div class="weapon-image">
         <Image :imageSrc="weapon.name"/>
       </div>
       <div class="weapon-title">
         <h1>{{weapon.name}}</h1>
-      </div>
+      </div> -->
+      <BarChart :weapons="weapon" />
     </div>
   </div>
   <div v-else class="container" style="algin-items: center">
