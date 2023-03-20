@@ -10,9 +10,12 @@ export default {
 }
 </script>
 <template>
-  <div v-if="imageSrc">
+  <div class="image" v-if="imageSrc">
     <img :src="`../../src/assets/weapons/${imageSrc}.png`">
   </div>
 </template>
 <style>
+  div .image {
+    padding: 30px;
+  }
 </style>

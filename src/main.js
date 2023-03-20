@@ -5,11 +5,11 @@ import './assets/main.css'
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
-/* import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons' */
+import { faPhone, faChartSimple, faTableCellsLarge } from '@fortawesome/free-solid-svg-icons'
+import { } from '@fortawesome/free-regular-svg-icons'
+import { } from '@fortawesome/free-brands-svg-icons'
 //Add all icons to the library so you can use it in your page
-library.add(faPhone)
+library.add(faPhone, faChartSimple, faTableCellsLarge)
 
 createApp(App)
   .component("font-awesome", FontAwesomeIcon).mount("#app");

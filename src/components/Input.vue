@@ -27,6 +27,7 @@ export default {
   .search label {
     font-size: 20px;
     color: #FFFFF0;
+    padding: 15px;
   }
 
   .search input {

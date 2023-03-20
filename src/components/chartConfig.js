@@ -3,7 +3,7 @@ export const data = {
     'ATK',
     'DEF',
     'WEIGHT',
-    'CU',
+    'TESTE',
   ],
   datasets: [
     {

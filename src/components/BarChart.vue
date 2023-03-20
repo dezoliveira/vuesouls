@@ -53,15 +53,16 @@ export default {
           }
         },
         layout: {
-          padding: 5
+          padding: 0
         },
         plugins: {
           legend: {
+            display: true,
               labels: {
-                  // This more specific font property overrides the global property
-                  font: {
-                      size: 24
-                  }
+                color: '#FFFFF0',
+                font: {
+                    size: 24
+                }
               }
           }
         },
@@ -101,24 +102,11 @@ export default {
         data: Object.values(this.weapons.requirements)
       }]
     },
-
-    test(){
-      /* let arr = []
-      let newArr = []
-      arr = Object.values(this.weapons.requirements)
-
-      for (let a in arr){
-        newArr = arr[a]
-        console.log(newArr)
-        return newArr
-      } */
-      return [10, 50, 100, 150]
-    }
   },
 
   created() {
     this.createData()
-  }
+  },
 }
 </script>
 <template>

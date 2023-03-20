@@ -33,7 +33,7 @@ export default {
   <div class="selectBox">
     <label>Filter by:</label>
     <select>
-      <option :value="''">None</option>
+      <option value="">None</option>
       <option 
         v-for="option in options" 
         :key="option.name"
@@ -49,6 +49,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    padding: 15px;
   }
 
   .selectBox label {
