@@ -4,6 +4,7 @@
   import Button from '../components/Button.vue'
   import Input from '../components/Input.vue'
   import BarChart from '../components/BarChart.vue'
+  import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
   export default {
     components: {
@@ -11,7 +12,8 @@
       SelectBox,
       Button,
       Input,
-      BarChart
+      BarChart,
+      PulseLoader
     },
     
     data() {
@@ -19,7 +21,12 @@
         weapons: [],
         filteredWeapons: [],
         category: null,
+        requirements: {},
         toggleButton: 'Normal View',
+        spinner: {
+          color: 'hsl(356, 88%, 35%)',
+          size: '25px'
+        }
       }
     },
 
@@ -34,6 +41,11 @@
 
       changeWeaponType(event) {
         let input = event.target.value
+        this.category = this.textFormat(event.target.value)
+
+        if(input === 'All'){
+          this.loadWeapons('')
+        }
 
         let newWeapons = 
           this.weapons.filter(x =>
@@ -60,8 +72,11 @@
 
       textFormat(text){
       return text
-                .replace(/[. ]/g, '-')
+                .replace('-', ' ')
                   .toLowerCase()
+                    .split(' ')
+                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ')
       },
 
       toggleButtons(e){
@@ -74,7 +89,7 @@
         } else {
           this.toggleButton = 'Graphic View'
         }
-      }
+      },
     },
 
     mounted() {
@@ -95,7 +110,7 @@
     </div>
   </div>
   <div v-if="category" class="category">
-    <h2>Category: {{category}}</h2>
+    <h1>Category: {{category}}</h1>
   </div>
   <div v-if="filteredWeapons.length" class="container">
     <div class="weapon-card" v-for="weapon in filteredWeapons" :key="weapon.name">
@@ -106,21 +121,27 @@
         <div class="weapon-title">
           <h1>{{weapon.name}}</h1>
         </div>
+        <div class="category">
+          <h3>Category: {{this.textFormat(weapon.weapon_type)}}</h3>
+        </div>
+        <div class="requirements">
+          <div>
+            <h3>ATK: {{weapon.requirements.strength}}</h3>
+            <h3>FAITH: {{weapon.requirements.faith}}</h3>
+          </div>
+          <div>
+            <h3>INT: {{weapon.requirements.intelligence}}</h3>
+            <h3>DEX: {{weapon.requirements.dexterity}}</h3>
+          </div>
+        </div>
       </div>
       <div class="weapon-container" v-if="this.toggleButton == 'Graphic View'">
         <BarChart :weapons="weapon" />
       </div>
     </div>
   </div>
-  <div v-else class="container" style="algin-items: center">
-    <div class="weapon-card">
-      <div class="weapon-image">
-        <Image :imageSrc="filteredWeapons.name"/>
-      </div>
-      <div class="weapon-title">
-        <h1>{{filteredWeapons.name}}</h1>
-      </div>
-    </div>
+  <div v-else class="spinner" style="algin-items: center">
+    <pulse-loader :color="spinner.color" :size="spinner.size"></pulse-loader>
   </div>
 </template>
 
@@ -186,9 +207,14 @@
   }
 
   .weapon-title {
+    display: flex;
+    align-items: center;
     text-align: center;
-    min-height: 180px;
     color: #FFFFF0;
+    padding: 15px;
+  }
+
+  .weapon-title h1{
     padding: 15px;
   }
 
@@ -207,5 +233,23 @@
     font-weight: bold;
     padding: 12px;
     background: hsl(356, 88%, 35%);
+  }
+
+  .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+  }
+
+  .requirements {
+    color: #FFFFF0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .requirements div {
+    padding: 0 15px;
   }
 </style>

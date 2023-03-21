@@ -53,7 +53,7 @@ export default {
           }
         },
         layout: {
-          padding: 0
+          padding: 0,
         },
         plugins: {
           legend: {
@@ -69,7 +69,8 @@ export default {
         scales: {
           r: {
               angleLines: {
-                  display: false
+                  display: true,
+                  color: '#fff'
               },
               suggestedMin: 0,
               suggestedMax: 10,
@@ -80,6 +81,8 @@ export default {
                 font: {
                   size: 18,
                 },
+                padding: 8,
+                color: 'rgba(255,255,255,0.7)',
               },
           }
         }

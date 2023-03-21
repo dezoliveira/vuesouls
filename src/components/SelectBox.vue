@@ -33,7 +33,7 @@ export default {
   <div class="selectBox">
     <label>Filter by:</label>
     <select>
-      <option value="">None</option>
+      <option value="All">All</option>
       <option 
         v-for="option in options" 
         :key="option.name"
