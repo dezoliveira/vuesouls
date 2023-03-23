@@ -3,7 +3,7 @@
   import SelectBox from '../components/SelectBox.vue'
   import Button from '../components/Button.vue'
   import Input from '../components/Input.vue'
-  import BarChart from '../components/BarChart.vue'
+  import RadialChart from '../components/RadialChart.vue'
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
   export default {
@@ -12,7 +12,7 @@
       SelectBox,
       Button,
       Input,
-      BarChart,
+      RadialChart,
       PulseLoader
     },
     
@@ -21,7 +21,6 @@
         weapons: [],
         filteredWeapons: [],
         category: null,
-        requirements: {},
         toggleButton: 'Normal View',
         spinner: {
           color: 'hsl(356, 88%, 35%)',
@@ -34,7 +33,6 @@
       async loadWeapons(params) {
         const req = await fetch('https://jgalat.github.io/ds-weapons-api/' + params)
         const data = await req.json()
-        console.log(data)
         this.weapons = data
         this.filteredWeapons = [...this.weapons]
       },
@@ -110,7 +108,7 @@
     </div>
   </div>
   <div v-if="category" class="category">
-    <h1>Category: {{category}}</h1>
+    <h2><strong>Category:</strong> {{category}}</h2>
   </div>
   <div v-if="filteredWeapons.length" class="container">
     <div class="weapon-card" v-for="weapon in filteredWeapons" :key="weapon.name">
@@ -122,21 +120,21 @@
           <h1>{{weapon.name}}</h1>
         </div>
         <div class="category">
-          <h3>Category: {{this.textFormat(weapon.weapon_type)}}</h3>
+          <h3><strong>Category:</strong> {{this.textFormat(weapon.weapon_type)}}</h3>
         </div>
         <div class="requirements">
           <div>
-            <h3>ATK: {{weapon.requirements.strength}}</h3>
-            <h3>FAITH: {{weapon.requirements.faith}}</h3>
+            <p><strong>ATK:</strong> {{weapon.requirements.strength}} </p>
+            <p><strong>FAITH:</strong> {{weapon.requirements.faith}} </p>
           </div>
           <div>
-            <h3>INT: {{weapon.requirements.intelligence}}</h3>
-            <h3>DEX: {{weapon.requirements.dexterity}}</h3>
+            <p><strong>INT:</strong> {{weapon.requirements.intelligence}} </p>
+            <p><strong>DEX:</strong> {{weapon.requirements.dexterity}}</p>
           </div>
         </div>
       </div>
       <div class="weapon-container" v-if="this.toggleButton == 'Graphic View'">
-        <BarChart :weapons="weapon" />
+        <RadialChart :weapons="weapon" />
       </div>
     </div>
   </div>
@@ -161,6 +159,10 @@
     color: #FFFFF0;
 
     padding: 15px;
+  }
+
+  .category strong {
+    color: hsl(356, 86%, 50%);
   }
 
   .choosenMenu {
@@ -212,6 +214,7 @@
     text-align: center;
     color: #FFFFF0;
     padding: 15px;
+    min-height: 134px;
   }
 
   .weapon-title h1{
@@ -243,7 +246,7 @@
   }
 
   .requirements {
-    color: #FFFFF0;
+    color: rgba(255,255,255,0.9);
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -251,5 +254,14 @@
 
   .requirements div {
     padding: 0 15px;
+  }
+
+  .requirements strong {
+    font-size: 20px;
+        color: hsl(356, 86%, 50%);
+  }
+
+  .requirements p {
+    font-size: 20px;
   }
 </style>

@@ -10,8 +10,7 @@ export default {
     async loadWeapons() {
       const req = await fetch('https://jgalat.github.io/ds-weapons-api/')
       const data = await req.json()
-      this.options = data
-      console.log(data)
+      this.filterData(data)
     },
 
     textFormat(text){
@@ -21,6 +20,20 @@ export default {
                     .split(' ')
                       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                         .join(' ')
+    },
+
+    filterData(data){
+      let arr = []
+      let newArr = []
+
+      for(let d in data) {
+        arr.push(data[d].weapon_type)
+      }
+
+      newArr = arr.filter((item, index) => 
+        arr.indexOf(item) === index)
+
+      this.options = newArr
     }
   },
 
@@ -36,10 +49,10 @@ export default {
       <option value="All">All</option>
       <option 
         v-for="option in options" 
-        :key="option.name"
-        :value="option.weapon_type"
+        :key="option"
+        :value="option"
       >
-        {{this.textFormat(option.weapon_type)}}
+        {{this.textFormat(option)}}
       </option>
     </select>
   </div>
