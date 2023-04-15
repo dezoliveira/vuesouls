@@ -12,4 +12,5 @@ import { } from '@fortawesome/free-brands-svg-icons'
 library.add(faPhone, faChartSimple, faTableCellsLarge)
 
 createApp(App)
-  .component("font-awesome", FontAwesomeIcon).mount("#app");
+  .component("font-awesome", FontAwesomeIcon)
+  .mount("#app");

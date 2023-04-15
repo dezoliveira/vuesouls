@@ -1,5 +1,12 @@
-<script setup>
+<script>
   import WeaponCard from './components/WeaponCard.vue';
+
+  export default {
+    name: 'App',
+    components: {
+      WeaponCard
+    }
+  }
 </script>
 
 <template>
