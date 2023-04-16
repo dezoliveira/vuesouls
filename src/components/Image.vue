@@ -11,7 +11,7 @@ export default {
 </script>
 <template>
   <div class="image" v-if="imageSrc">
-    <img :src="`../../src/assets/weapons/${imageSrc}.png`">
+    <img :src="`./weapons/${imageSrc}.png`"/>
   </div>
 </template>
 <style>
